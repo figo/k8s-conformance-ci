@@ -20,8 +20,8 @@
 
 K8S_RELEASE_DEV_BASE_URL="https://storage.googleapis.com/kubernetes-release-dev"
 BUILD=$(curl ${K8S_RELEASE_DEV_BASE_URL}/ci/latest.txt)
-echo ${BUILD}
 
+# save enviroments variables to file
 ENVS_FILE=$(mktemp)
 
 # echo_env_var writes an environment variable and its value to
@@ -29,6 +29,7 @@ ENVS_FILE=$(mktemp)
 echo_env_var() {
   if [ -n "$(echo "${1}" | sed 's/^[^=]*=//g')" ]; then 
     echo "${1}" >> "${ENVS_FILE}"
+    export "${1}"
   fi
 }
 
