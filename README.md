@@ -6,15 +6,15 @@ The CI has four stages:
 
 | Stage  | Description |
 |------|-------------|
-| Build | K8s build can be fetched from https://storage.googleapis.com/kubernetes-release-dev/ci/ or from local |
+| Artifacts | K8s artifacts can be fetched from https://storage.googleapis.com/kubernetes-release/-dev or from local |
 | Provision | Provision k8s cluster using artifacts from build | 
 | Test | Run conformance tests|
 | Result | Make test result available to testgrid or local |
 
-### Build
-From k8s
+### Artifacts
+define the location of k8s artifacts
 ```
-# fetch latest version  
+# fetch latest version by  
 ./hack/get-build.sh -v ci/latest
 or
 gsutil ls gs://kubernetes-release-dev/ci/k8s-beta.txt
@@ -37,7 +37,10 @@ gsutil ls gs://kubernetes-release-dev/ci/latest-bazel.txt
 gsutil ls gs://kubernetes-release-dev/ci/latest-green.txt
 gsutil ls gs://kubernetes-release-dev/ci/latest.txt
 ```
-or from local
+
+```
+artifacts.sh
+```
 
 ### Provision
 Provision cluster using artifacts from build
