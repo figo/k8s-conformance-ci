@@ -1,5 +1,5 @@
 # Kubernetes conformance CI 
-The CI that run kubernetes conformance tests on cluster, 
+The CI that run kubernetes conformance tests on cluster
 
 ## Concept
 The CI has four stages:
@@ -7,11 +7,11 @@ The CI has four stages:
 | Stage  | Description |
 |------|-------------|
 | Artifacts | K8s artifacts can be fetched from https://storage.googleapis.com/kubernetes-release/-dev or from local |
-| Provision | Provision k8s cluster using artifacts from build | 
+| Provision | Provision k8s cluster using artifacts | 
 | Test | Run conformance tests|
 | Result | Make test result available to testgrid or local |
 
-### Artifacts
+#### Artifacts
 define the location of k8s artifacts
 ```
 # fetch latest version by  
@@ -42,24 +42,51 @@ gsutil ls gs://kubernetes-release-dev/ci/latest.txt
 artifacts.sh
 ```
 
-### Provision
-Provision cluster using artifacts from build
+#### Provision
+Provision cluster using artifacts
 ```
 provision.sh 
 ```
 
-### Test
+#### Test
 get kubetest and launch kubernetes conformance tests
 ```
 conformance.sh
 ```
 
-### Result
+#### Result
 make test result availabe to testgrid or local
 ```
 result.sh
 ```
 
+## HOWTO Build container
+TODO: need to handle versioning
+```
+make build
+
+```
+
+## HOWTO Upload container
+```
+make upload
+```
+
+## HOWTO Run container
+TODD: will remove DNS_SERVER later.
+```
+export DNS_SERVER=192.168.1.5 && \
+docker pull luoh/k8s-conformance && \
+docker run \
+  --rm \
+  --dns $DNS_SERVER --dns 8.8.8.8 \
+  -e VSPHERE_SERVER=$VSPHERE_SERVER \
+  -e VSPHERE_USER=$VSPHERE_USER \
+  -e VSPHERE_PASSWORD=$VSPHERE_PASSWORD \
+  -e TF_VAR_etcd_server=$DNS_SERVER:2379 \
+  -e TF_VAR_discovery_nameserver=$DNS_SERVER \
+  -ti luoh/k8s-conformance:v0.01
+```
 
 
 

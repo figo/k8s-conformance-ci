@@ -1,7 +1,7 @@
-FROM provision
+FROM provisioning
 LABEL maintainer="Hui Luo <luoh@vmware.com>"
 
-COPY *.sh /cmd/
+COPY *.sh /cncf/
 
 CMD ["shell"]
-ENTRYPOINT ["/cmd/provision.sh"]
+ENTRYPOINT ["/cncf/orchestrator.sh"]

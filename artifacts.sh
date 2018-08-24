@@ -1,45 +1,41 @@
 # !/bin/sh
+set -e
 
-# input: none
-# output: artifacts as enviroment variables
+# Input:  artifacts repo ("upstream-latest" or "local")
+# Output: artifacts location as enviroment variables
+#         $CNI_ARTIFACT
+#         $ETCD_ARTIFACT
+#         $KUBE_APISERVER_ARTIFACT
+#         $KUBE_CONTROLLER_MANAGER_ARTIFACT
+#         $KUBE_SCHEDULER_ARTIFACT
+#         $KUBELET_ARTIFACT
+#         $KUBE_PROXY_ARTIFACT
+#         $KUBE_PROXY_TAG
+#         $KUBECTL_ARTIFACT
+#         $KUBETEST_ARTIFACT
 
+source ./util.sh
+ARTIFACTS_REPO="upstream-latest"
+if [ ! "$1" = "" ]; then ARTIFACTS_REPO=$1; fi
+if [ ! "$2" = "" ]; then ENVS_FILE=$2; fi
 
-# $CNI_ARTIFACT
-# $ETCD_ARTIFACT
+BASE_URL=""
+BUILD=""
+if [ "$ARTIFACTS_REPO" = "upstream-latest" ] ; then
+  K8S_RELEASE_DEV_BASE_URL="https://storage.googleapis.com/kubernetes-release-dev"
+  BUILD=$(curl ${K8S_RELEASE_DEV_BASE_URL}/ci/latest.txt)
+  BASE_URL="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}"
 
-# $KUBE_APISERVER_ARTIFACT
-# $KUBE_CONTROLLER_MANAGER_ARTIFACT
-# $KUBE_SCHEDULER_ARTIFACT
-# $KUBELET_ARTIFACT
-# $KUBE_PROXY_ARTIFACT
-# $KUBE_PROXY_TAG
+elif [ "$ARTIFACTS_REPO" = "local" ] ; then
+  #TODO: add local artifacts support
+  echo "not supported"
+fi
 
-# $KUBECTL_ARTIFACT
-# $KUBETEST_ARTIFACT
-
-
-K8S_RELEASE_DEV_BASE_URL="https://storage.googleapis.com/kubernetes-release-dev"
-BUILD=$(curl ${K8S_RELEASE_DEV_BASE_URL}/ci/latest.txt)
-
-# save enviroments variables to file
-ENVS_FILE=$(mktemp)
-
-# echo_env_var writes an environment variable and its value to
-# ENVS_FILE as long as the value is not empty
-echo_env_var() {
-  if [ -n "$(echo "${1}" | sed 's/^[^=]*=//g')" ]; then 
-    echo "${1}" >> "${ENVS_FILE}"
-    export "${1}"
-  fi
-}
-
-echo_env_var KUBE_APISERVER_ARTIFACT="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}/bin/linux/amd64/kube-apiserver"
-echo_env_var KUBE_CONTROLLER_MANAGER_ARTIFACT="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}/bin/linux/amd64/kube-controller-manager"
-echo_env_var KUBE_SCHEDULER_ARTIFACT="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}/bin/linux/amd64/kube-scheduler"
-echo_env_var KUBELET_ARTIFACT="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}/bin/linux/amd64/kubelet"
-echo_env_var KUBE_PROXY_ARTIFACT="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}/bin/linux/amd64/kube-proxy"
-echo_env_var KUBECTL_ARTIFACT="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}/bin/linux/amd64/kubectl"
-echo_env_var KUBETEST_ARTIFACT="${K8S_RELEASE_DEV_BASE_URL}/ci/${BUILD}/kubernetes-test.tar.gz"
-echo_env_var KUBE_PROXY_TAG="${BUILD}"
-
-echo ${ENVS_FILE}
+echo_env_var KUBE_APISERVER_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-apiserver" ${ENVS_FILE}
+echo_env_var KUBE_CONTROLLER_MANAGER_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-controller-manager" ${ENVS_FILE}
+echo_env_var KUBE_SCHEDULER_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-scheduler" ${ENVS_FILE}
+echo_env_var KUBELET_ARTIFACT="${BASE_URL}/bin/linux/amd64/kubelet" ${ENVS_FILE}
+echo_env_var KUBE_PROXY_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-proxy" ${ENVS_FILE}
+echo_env_var KUBECTL_ARTIFACT="${BASE_URL}/bin/linux/amd64/kubectl" ${ENVS_FILE}
+echo_env_var KUBETEST_ARTIFACT="${BASE_URL}/kubernetes-test.tar.gz" ${ENVS_FILE}
+echo_env_var KUBE_PROXY_TAG="${BUILD}" ${ENVS_FILE}
