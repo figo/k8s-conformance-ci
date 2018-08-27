@@ -1,5 +1,4 @@
 # !/bin/sh
-set -e
 
 # Input:  artifacts repo ("upstream-latest" or "local")
 # Output: artifacts location as enviroment variables
