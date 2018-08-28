@@ -75,7 +75,7 @@ make upload
 ## HOWTO Run container
 TODD: will remove DNS_SERVER later.
 ```
-export DNS_SERVER=192.168.1.5 && \
+export DNS_SERVER=192.168.2.99 && \
 docker pull luoh/k8s-conformance && \
 docker run \
   --rm \
