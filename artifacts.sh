@@ -12,6 +12,7 @@
 #         $KUBE_PROXY_TAG
 #         $KUBECTL_ARTIFACT
 #         $KUBETEST_ARTIFACT
+#         $KUBERNETES_ARTIFACT
 
 source ./util.sh
 ARTIFACTS_REPO="upstream-latest"
@@ -37,4 +38,5 @@ echo_env_var KUBELET_ARTIFACT="${BASE_URL}/bin/linux/amd64/kubelet" ${ENVS_FILE}
 echo_env_var KUBE_PROXY_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-proxy" ${ENVS_FILE}
 echo_env_var KUBECTL_ARTIFACT="${BASE_URL}/bin/linux/amd64/kubectl" ${ENVS_FILE}
 echo_env_var KUBETEST_ARTIFACT="${BASE_URL}/kubernetes-test.tar.gz" ${ENVS_FILE}
+echo_env_var KUBERNETES_ARTIFACT="${BASE_URL}/kubernetes.tar.gz" ${ENVS_FILE}
 echo_env_var KUBE_PROXY_TAG="${BUILD}" ${ENVS_FILE}
