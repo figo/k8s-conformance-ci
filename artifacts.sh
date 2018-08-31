@@ -39,4 +39,8 @@ echo_env_var KUBE_PROXY_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-proxy" ${ENVS
 echo_env_var KUBECTL_ARTIFACT="${BASE_URL}/bin/linux/amd64/kubectl" ${ENVS_FILE}
 echo_env_var KUBETEST_ARTIFACT="${BASE_URL}/kubernetes-test.tar.gz" ${ENVS_FILE}
 echo_env_var KUBERNETES_ARTIFACT="${BASE_URL}/kubernetes.tar.gz" ${ENVS_FILE}
-echo_env_var KUBE_PROXY_TAG="${BUILD}" ${ENVS_FILE}
+
+# gcr only store released version kube-proxy container
+# v1.13.0-alpha.0.839+ef741c3038bb26 -> v1.13.0-alpha.0
+KUBE_PROXY=$(echo ${BUILD} | sed 's|\(.*\)\.\(.*\)|\1|')
+echo_env_var KUBE_PROXY_TAG="${KUBE_PROXY}" ${ENVS_FILE}
