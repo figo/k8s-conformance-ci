@@ -12,6 +12,7 @@ curl -sSL ${KUBERNETES_ARTIFACT} | tar xvz
 # launch conformance tests
 export KUBECONFIG=${KUBECONFIG}
 export KUBERNETES_CONFORMANCE_TEST=y
+export SKIP="Alpha|Kubectl|\[(Disruptive|Feature:[^\]]+|Flaky)\]"
 cd kubernetes
 
 # get the right version of kubectl
