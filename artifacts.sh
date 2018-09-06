@@ -6,6 +6,7 @@
 #         $ETCD_ARTIFACT
 #         $KUBE_APISERVER_ARTIFACT
 #         $KUBE_CONTROLLER_MANAGER_ARTIFACT
+#         $CLOUD_CONTROLLER_MANAGER_ARTIFACT
 #         $KUBE_SCHEDULER_ARTIFACT
 #         $KUBELET_ARTIFACT
 #         $KUBE_PROXY_ARTIFACT
@@ -33,6 +34,7 @@ fi
 
 echo_env_var KUBE_APISERVER_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-apiserver" ${ENVS_FILE}
 echo_env_var KUBE_CONTROLLER_MANAGER_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-controller-manager" ${ENVS_FILE}
+echo_env_var CLOUD_CONTROLLER_MANAGER_ARTIFACT="${BASE_URL}/bin/linux/amd64/cloud-controller-manager" ${ENVS_FILE}
 echo_env_var KUBE_SCHEDULER_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-scheduler" ${ENVS_FILE}
 echo_env_var KUBELET_ARTIFACT="${BASE_URL}/bin/linux/amd64/kubelet" ${ENVS_FILE}
 echo_env_var KUBE_PROXY_ARTIFACT="${BASE_URL}/bin/linux/amd64/kube-proxy" ${ENVS_FILE}
