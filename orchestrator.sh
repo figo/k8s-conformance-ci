@@ -21,6 +21,9 @@ source artifacts.sh "upstream-latest" "${ENV_FILE}"
 # declare kubeconfig file location
 echo_env_var KUBECONFIG="${PROVISION_LOG_DIR}/kubeconfig" "${ENV_FILE}"
 
+# setup ccm
+./ccm.sh
+
 # run conformance tests
 ./conformance.sh "${CONFORMANCE_LOG_DIR}"
 

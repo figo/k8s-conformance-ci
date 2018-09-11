@@ -21,6 +21,6 @@ curl -sSL -o ./platforms/linux/amd64/kubectl ${KUBECTL_ARTIFACT}
 chmod +x ./platforms/linux/amd64/kubectl
 
 go run ./hack/e2e.go -- --provider=skeleton \
---test --test_args="--ginkgo.focus=\[Conformance\]" \
+--test --test_args="--ginkgo.focus=\[Conformance\] --ginkgo.skip=${SKIP}" \
 --dump=${CONFORMANCE_LOG_DIR}/_artifacts \
 --check-version-skew=false | tee ${CONFORMANCE_LOG_DIR}/e2e.log || true

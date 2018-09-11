@@ -8,6 +8,7 @@ The CI has four stages:
 |------|-------------|
 | Artifacts | K8s artifacts can be fetched from https://storage.googleapis.com/kubernetes-release/-dev or from local |
 | Provision | Provision k8s cluster using artifacts | 
+| Provider Setup | Setup cloud provider |
 | Test | Run conformance tests|
 | Result | Make test result available to testgrid or local |
 
@@ -47,6 +48,13 @@ Provision cluster using artifacts
 ```
 provision.sh 
 ```
+
+#### Provider Setup
+Setup cloud provider (out of tree by default)
+```
+ccm.sh 
+```
+
 
 #### Test
 get kubetest and launch kubernetes conformance tests
