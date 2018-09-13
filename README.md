@@ -81,19 +81,22 @@ make upload
 ```
 
 ## HOWTO Run container
-TODD: will remove DNS_SERVER later.
+gcloud keyfile folder needed be bind mounted   
+for uploading result to testgrid;  
+TODD: will remove DNS_SERVER later.  
 ```
 export DNS_SERVER=192.168.2.99 && \
-docker pull luoh/k8s-conformance && \
+docker pull luoh/k8s-conformance:latest && \
 docker run \
   --rm \
   --dns $DNS_SERVER --dns 8.8.8.8 \
+  -v ${PWD}:/upload \
   -e VSPHERE_SERVER=$VSPHERE_SERVER \
   -e VSPHERE_USER=$VSPHERE_USER \
   -e VSPHERE_PASSWORD=$VSPHERE_PASSWORD \
   -e TF_VAR_etcd_server=$DNS_SERVER:2379 \
   -e TF_VAR_discovery_nameserver=$DNS_SERVER \
-  -ti luoh/k8s-conformance:v0.01
+  -ti luoh/k8s-conformance:latest
 ```
 
 
