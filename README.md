@@ -56,6 +56,14 @@ ccm.sh
 ```
 
 
+#### CNI Setup
+Deploy CNI daemonset, this daemon need be run after CCM untaint 
+all nodes and before actuall pods been deployed.
+```
+cni.sh 
+```
+
+
 #### Test
 get kubetest and launch kubernetes conformance tests
 ```

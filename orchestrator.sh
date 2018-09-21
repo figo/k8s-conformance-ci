@@ -25,6 +25,9 @@ echo_env_var CONFORMANCE_LOG_DIR="${CONFORMANCE_LOG_DIR}" "${ENV_FILE}"
 # setup ccm
 ./ccm.sh || { echo 'ccm setup failed' ; exit 1; }
 
+# deploy cni
+./cni.sh || { echo 'cni deployment failed' ; exit 1; }
+
 # run conformance tests
 ./conformance.sh || { echo 'conformance test failed' ; exit 1; }
 

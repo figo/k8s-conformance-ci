@@ -17,3 +17,7 @@ kubectl create configmap cloud-config --from-file=ccm/vsphere.conf --namespace=k
 
 # deploy ccm
 kubectl create -f ccm/vsphere-cloud-controller-manager-pod.yaml
+
+source ./util.sh
+# wait all pods are running
+wait_until_pods_running
