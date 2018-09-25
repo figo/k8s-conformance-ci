@@ -6,6 +6,8 @@ if [ "${K8S_VERSION_BASE}" = "" ]
 then 
   K8S_VERSION_BASE="ci"
   K8S_VERSION="latest"
+else
+  K8S_VERSION="v${K8S_VERSION}"
 fi
 
 

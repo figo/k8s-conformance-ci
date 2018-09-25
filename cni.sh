@@ -12,5 +12,6 @@ source ./util.sh
 # wait for all pods are running
 wait_until_pods_running
 
-# TODO: looks like CNI may take a minute to create route rules for all nodes
-sleep 90
+# TODO: CNI may take a minute to create route rules for all nodes,
+# especially when there are 4 nodes, we need a better way than sleep.
+sleep 600

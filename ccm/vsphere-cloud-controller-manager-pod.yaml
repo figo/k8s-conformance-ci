@@ -24,7 +24,7 @@ spec:
     effect: NoSchedule
   containers:
     - name: vsphere-cloud-controller-manager
-      image: luoh/vsphere-cloud-controller-manager:latest
+      image: gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:latest
       args:
         - /bin/vsphere-cloud-controller-manager
         - --v=2
