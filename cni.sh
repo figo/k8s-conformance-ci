@@ -13,5 +13,5 @@ source ./util.sh
 wait_until_pods_running
 
 # TODO: CNI may take a minute to create route rules for all nodes,
-# especially when there are 4 nodes, we need a better way than sleep.
-sleep 600
+if [ "${CNI_WAIT}" = "" ]; then CNI_WAIT=90; fi
+sleep "${CNI_WAIT}"
