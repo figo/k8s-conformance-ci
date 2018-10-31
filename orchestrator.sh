@@ -34,10 +34,10 @@ echo_env_var CONFORMANCE_LOG_DIR="${CONFORMANCE_LOG_DIR}" "${ENV_FILE}"
 ./cni.sh || { echo 'cni deployment failed' ; exit 1; }
 
 # run conformance tests
-./conformance.sh || { echo 'conformance test failed' ; exit 1; }
+#./conformance.sh || { echo 'conformance test failed' ; exit 1; }
 
 # post result
-./result.sh || { echo 'failed to upload test result' ; exit 1; }
+#./result.sh || { echo 'failed to upload test result' ; exit 1; }
 
 # destroy kubernetes cluster
-./provision.sh "vsphere-destroy" "${NAME}" "file" "${PROVISION_LOG_DIR}"
+#./provision.sh "vsphere-destroy" "${NAME}" "file" "${PROVISION_LOG_DIR}"
